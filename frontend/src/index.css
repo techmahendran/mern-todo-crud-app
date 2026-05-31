@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+/* Remove scrollbar arrows */
+.no-scrollbar-arrows::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.no-scrollbar-arrows::-webkit-scrollbar {
+  width: 4px;
+}
+
+.no-scrollbar-arrows::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+.no-scrollbar-arrows::-webkit-scrollbar-track {
+  background: transparent;
+}
