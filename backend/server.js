@@ -18,21 +18,26 @@ app.use(express.json());
 
 app.use("/api/todos", todoRoutes);
 
-const __dirname = path.resolve()
+const __dirname = path.resolve();
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '/frontend/dist')))
-  app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, "frontend", 'dist', 'index.html'))
-  })
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "frontend", "dist")));
+
+  app.use((req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+  });
 }
 
 app.get("/", (req, res) => {
   res.send("<h1>Server is Running</h1>");
 });
 
-app.listen(5000, () => {
-  connectDB();
-
-  console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(PORT, async () => {
+  try {
+    await connectDB();
+    console.log(`Server is running on port ${PORT}`);
+  } catch (error) {
+    console.error("Database connection failed:", error);
+    process.exit(1);
+  }
 });
